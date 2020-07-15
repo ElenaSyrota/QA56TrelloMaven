@@ -33,11 +33,12 @@ public class CurrentBoardHelper extends PageBase {
         this.boardName = boardName;
         PageFactory.initElements(driver,this);
     }
-    public void openCurrentBoard(){
+    public CurrentBoardHelper openCurrentBoard(){
         System.out.println("From openCurrentBoard: " + this.boardName);
         WebElement ourBoard = driver
                 .findElement(By.xpath(boardLocator()));
         ourBoard.click();
+        return this;
     }
 
     public void waitUntilPageIsLoaded(){
@@ -90,7 +91,7 @@ public class CurrentBoardHelper extends PageBase {
         return driver.findElements(By.cssSelector("a.list-card")).size();
     }
 
-    public void pressAddCardButton(){
+    public CurrentBoardHelper pressAddCardButton(){
         //--- Define two possible buttons for adding new card and click on the displayed one---
         WebElement addCardButton = driver
                 .findElement(By.cssSelector("span.js-add-a-card"));
@@ -100,23 +101,27 @@ public class CurrentBoardHelper extends PageBase {
             addCardButton.click();
         }
         else addAnotherCardButton.click();
+        return this;
     }
 
-    public void enterTextToCard(String test_card) {
+    public CurrentBoardHelper enterTextToCard(String test_card) {
         WebElement textCurrentCard = driver.findElement(By.cssSelector("textarea.list-card-composer-textarea"));
         textCurrentCard.click();
         textCurrentCard.sendKeys(test_card);
+        return this;
     }
 
-    public void submitAddingCard() {
+    public CurrentBoardHelper submitAddingCard() {
         WebElement submitCardButton = driver.findElement(By.xpath("//input[@type='submit'][@value = 'Add Card']"));
         submitCardButton.click();
+        return this;
     }
 
-    public void cancelEditCardMode() {
+    public CurrentBoardHelper cancelEditCardMode() {
         WebElement cancelEditCardButton = driver.findElement(By.cssSelector("div.card-composer a.icon-close"));
         cancelEditCardButton.click();
         waitUntilElementIsNotVisible(By.cssSelector("div.card-composer a.icon-close"),10);
+        return  this;
     }
 
     private String boardLocator() {

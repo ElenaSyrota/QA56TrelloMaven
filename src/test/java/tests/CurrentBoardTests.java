@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.selenium.pages.*;
+import util.DataProviders;
 
 public class CurrentBoardTests extends TestBase {
     LoginPageHelper loginPage;
@@ -35,15 +36,15 @@ public class CurrentBoardTests extends TestBase {
 
     }
 
-    @Test
-    public void createNewCard()  {
+    @Test(dataProviderClass = DataProviders.class, dataProvider = "dataProviderThirdDP")
+    public void createNewCard(String nameCard)  {
         if (!qaHaifa56Page.existsList()) qaHaifa56Page.createNewList("Test");
 
         int beforeAdding = qaHaifa56Page.receiveQuantityOfCards();
-        qaHaifa56Page.pressAddCardButton();
-        qaHaifa56Page.enterTextToCard("test card");
-        qaHaifa56Page.submitAddingCard();
-        qaHaifa56Page.cancelEditCardMode();
+        qaHaifa56Page.pressAddCardButton()
+                .enterTextToCard(nameCard)
+                .submitAddingCard()
+                .cancelEditCardMode();
 
         int afterAdding = qaHaifa56Page.receiveQuantityOfCards();
         Assert.assertEquals(afterAdding,beforeAdding+1,
@@ -51,9 +52,4 @@ public class CurrentBoardTests extends TestBase {
 
 
     }
-
-
-
-
-
 }

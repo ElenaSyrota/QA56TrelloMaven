@@ -21,23 +21,26 @@ public class UpperMenuHelper extends PageBase {
         super(driver);
     }
 
-    public void waitUntilPageIsLoaded(){
+    public UpperMenuHelper waitUntilPageIsLoaded(){
         waitUntilElementIsClickable(profilevisabilityMenuItem,20);
         waitUntilElementIsClickable(activityMenuItem,20);
         waitUntilElementIsClickable(helpMenuItem,20);
+        return this;
     }
 
     public void openProfileVisabilityScreen(){
         profilevisabilityMenuItem.click();
     }
 
-    public void openMenuPage(){
+    public UpperMenuHelper openMenuPage(){
         waitUntilElementIsClickable(upperRight,20);
         upperRight.click();
+        return this;
     }
 
-    public void openActivityPage() {
+    public UpperMenuHelper openActivityPage() {
         activityMenuItemFromCurrentBoard.click();
+        return this;
     }
 
     public void openHelpMenu(){
