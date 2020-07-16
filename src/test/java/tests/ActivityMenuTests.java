@@ -38,7 +38,6 @@ public class ActivityMenuTests extends TestBase{
                      .openActivityPage();
         activityPage.waitUntilPageIsLoaded();
 
-
         Assert.assertTrue(activityPage.getLastActivityText().contains("added list"+listTitle+" to "),
                 "The text in the last activity record doesn't correspond to event adding new list "+ listTitle);
 

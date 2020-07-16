@@ -61,7 +61,6 @@ public class DataProviders {
     }
 
 
-
     @DataProvider
     public static Iterator<Object[]> dataProviderSecond() {
         List<Object[]> data = new ArrayList();
