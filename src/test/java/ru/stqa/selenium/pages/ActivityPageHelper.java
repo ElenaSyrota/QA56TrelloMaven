@@ -15,10 +15,13 @@ public class ActivityPageHelper extends PageBase {
     }
 
     public void waitUntilPageIsLoaded(){
+        log4j.info("---Class ActivityPageHelper,method - waitUntilPageIsLoaded was started");
+        log4j.info("Wait until activity records list is clickable");
         waitUntilAllElementsAreVisible(activityRecordsList,30);
     }
 
     public String getLastActivityText() {
+        System.out.println(activityRecordsList.get(0).getText());
         return activityRecordsList.get(0).getText();
     }
 }

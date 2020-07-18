@@ -17,6 +17,7 @@ public class ActivityMenuTests extends TestBase{
 
     @BeforeMethod
     public void initTests() throws InterruptedException {
+
         loginPage = PageFactory.initElements(driver,LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver,BoardsPageHelper.class);
         qaHaifa56Page = new CurrentBoardHelper(driver,BOARD_TITLE);
@@ -31,16 +32,21 @@ public class ActivityMenuTests extends TestBase{
     }
    @Test(dataProviderClass = DataProviders.class,dataProvider = "DPActivityMenuTests")
     public void addingNewListEventInActivity(String listTitle){
-        //String listTitle= "Activity new";
-        qaHaifa56Page.createNewList(listTitle);
-        upperMenuPage.openMenuPage()
-                     .waitUntilPageIsLoaded()
-                     .openActivityPage();
+       log4j.startTestCase("loginTestPositive");
+       log4j.info("Create new list event activity: "+listTitle);
+       qaHaifa56Page.createNewList(listTitle);
+       log4j.info("Open upper menu page");
+       upperMenuPage.openMenuPage()
+                    .waitUntilPageIsLoaded()
+                    .openActivityPage();
+
+       log4j.info("Activity page screen is loading");
         activityPage.waitUntilPageIsLoaded();
 
-        Assert.assertTrue(activityPage.getLastActivityText().contains("added list"+listTitle+" to "),
-                "The text in the last activity record doesn't correspond to event adding new list "+ listTitle);
-
+       log4j.info("Test result (assert): The text in the last activity record doesn't correspond to event adding new list "+ listTitle);
+       Assert.assertTrue(activityPage.getLastActivityText().contains(" added list "+ listTitle + " to "),
+               "The text in the last activity record doesn't correspond to event adding new list " + listTitle );
+        log4j.endTestCase();
     }
 
 }

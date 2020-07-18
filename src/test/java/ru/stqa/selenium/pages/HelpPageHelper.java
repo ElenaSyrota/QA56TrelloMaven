@@ -34,11 +34,14 @@ public class HelpPageHelper extends PageBase {
     }
 
     public void chooseGettingStartedGuide() {
-
+        log4j.info("---Class HelpPageHelper,method - chooseGettingStartedGuide was started");
+        log4j.info("Wait until link text 'Getting Started Guide' is clickable");
         waitUntilElementIsClickable(helpGettingStartedGuide,15);
 
-        System.out.println("Current window: " + driver.getWindowHandle());
+        //System.out.println("Current window: " + driver.getWindowHandle());
+        log4j.info("Switch to frame ");
         driver.switchTo().frame(frameNameHelp);
+        log4j.info("Click on the link text 'Getting Started Guide' ");
         helpGettingStartedGuide.click();
 
     }

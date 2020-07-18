@@ -3,8 +3,11 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -13,8 +16,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 //import HomePageHelper;
 import ru.stqa.selenium.SuiteConfiguration;
+import ru.stqa.selenium.factory.AbstractWebDriverPool;
 import ru.stqa.selenium.factory.WebDriverPool;
 import ru.stqa.selenium.pages.HomePageHelper;
+import util.LogLog4j;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,15 +28,36 @@ public class TestBase {
     protected static URL gridHubUrl = null;
     protected static String baseUrl;
     protected static Capabilities capabilities;
+    //protected static EventFiringWebDriver driver;
 
-    protected WebDriver driver;
-
+    protected EventFiringWebDriver driver;
+    //protected WebDriver driver;
     public static final String BOARD_TITLE = "QA Haifa56";
     public static final String LOGIN = "lena.syrota@gmail.com";
     public static final String PASSWORD = "638465Lena";
     public static final String USERNAME = "elenasyrota";
-    //public static final String USER_NAME_MENU = "Elena Syrota (elenasyrota)";
+
+    public static LogLog4j log4j = new LogLog4j();
+
     HomePageHelper homePage;
+
+    public static  class  MyListener extends AbstractWebDriverEventListener{
+
+        @Override
+        public void beforeFindBy(By by, WebElement element, WebDriver driver) {
+            log4j.info("Found element: " + by);
+        }
+
+        @Override
+        public void afterFindBy(By by, WebElement element, WebDriver driver) {
+            log4j.info("Element "+ by +" was found.");
+        }
+
+        @Override
+        public void onException(Throwable throwable, WebDriver driver) {
+            log4j.error("Error: "+ throwable);
+        }
+    }
 
     @BeforeSuite
     public void initTestSuite() throws IOException {
@@ -45,8 +71,10 @@ public class TestBase {
 
     @BeforeMethod
     public void initWbDriver() {
+        log4j.startTestCase("initWbDriver");
 
-        driver = WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities);driver = new ChromeDriver();
+        driver = new EventFiringWebDriver(WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities));
+        driver.register(new MyListener());
         driver.get(baseUrl);
         homePage = PageFactory.initElements(driver,HomePageHelper.class);
         homePage.waitUntilPageIsLoaded();

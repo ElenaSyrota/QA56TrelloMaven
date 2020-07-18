@@ -20,7 +20,6 @@ public class GettingStartedHelpTests extends TestBase{
 
         loginPage = PageFactory.initElements(driver,LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver, BoardsPageHelper.class);
-        //qaHaifa56Page = new CurrentBoardHelper(driver, BOARD_TITLE);
         upperMenuPage= PageFactory.initElements(driver, UpperMenuHelper.class);
         helpPage= PageFactory.initElements(driver, HelpPageHelper.class);
         gettingStartedGuidePage= PageFactory.initElements(driver, GettingStartedGuideHelper.class);
@@ -28,25 +27,25 @@ public class GettingStartedHelpTests extends TestBase{
         loginPage.openLoginPage();
         loginPage.loginAsAtlassian(LOGIN,PASSWORD);
         boardsPage.waitUntilPageIsLoaded();
-        //qaHaifa56Page.openCurrentBoard();
-        //qaHaifa56Page.waitUntilPageIsLoaded();
 
         upperMenuPage.openMenuPage();
         upperMenuPage.waitUntilPageIsLoaded();
         upperMenuPage.openHelpMenu();
         helpPage.waitUntilPageIsLoaded();
-
     }
 
     @Test
     public void clickHelpInUpRightMenu() {
-
+        log4j.startTestCase("clickHelpInUpRightMenu");
+        log4j.info("Choose link text 'Getting Started Guide'");
         helpPage.chooseGettingStartedGuide();
-        //helpPage.waitUntilNewPageIsLoaded();
+
+        log4j.info("Switch to window 'Getting Started Guide' and wait until page is loaded");
         gettingStartedGuidePage.switchToWindowAndWaitPageLoading();
 
+        log4j.info("Test result verification (assert): Text title is 'Getting Started with Trello'");
         Assert.assertEquals(gettingStartedGuidePage.getTitle(), "Getting Started with Trello",
                 "Actual title is not equal to expected title");
-
+        log4j.endTestCase();
     }
 }

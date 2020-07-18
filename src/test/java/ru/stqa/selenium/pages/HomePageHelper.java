@@ -13,6 +13,7 @@ public class HomePageHelper extends PageBase {
     }
 
     public void waitUntilPageIsLoaded() {
+        log4j.info("---Class HomePageHelper,method - waitUntilPageIsLoaded was started");
         waitUntilElementIsClickable(loginIcon,20);
     }
 }

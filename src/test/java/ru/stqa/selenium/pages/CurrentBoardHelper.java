@@ -49,6 +49,7 @@ public class CurrentBoardHelper extends PageBase {
 
 
     public int getListsQuantity(){
+
         return listLists.size();
     }
 

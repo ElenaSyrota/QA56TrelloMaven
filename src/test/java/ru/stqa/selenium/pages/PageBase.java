@@ -5,12 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import util.LogLog4j;
 
 import java.util.List;
 import java.util.Set;
 
 public class PageBase {
     WebDriver driver;
+    public static LogLog4j log4j = new LogLog4j();
     public PageBase(WebDriver driver) {
         this.driver = driver;
     }
@@ -148,147 +150,4 @@ public class PageBase {
         textField.sendKeys(value);
     }
 
-//    WebDriver driver;
-//
-//    public PageBase(WebDriver driver) {
-//        this.driver = driver;
-//    }
-//    public String  getTitle(){
-//        return  driver.getTitle();
-//    }
-//
-//    public void waitUntilElementIsClickable(By locator, int time) {
-//        try {
-//            new WebDriverWait(driver,time).until(ExpectedConditions
-//                    .elementToBeClickable(locator));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void waitUntilElementIsClickable(WebElement element, int time) {
-//
-//        try {
-//            new WebDriverWait(driver, time).until(ExpectedConditions
-//                            .elementToBeClickable(element));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void waitUntilFrameElementIsClickable(WebElement element, int time) {
-//
-//        try {
-//            new WebDriverWait(driver, time).until(ExpectedConditions
-//                    .frameToBeAvailableAndSwitchToIt(element));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void waitUntilAttributValuesIs(By locator, String attribut, String value, int time) {
-//        try {
-//            new WebDriverWait(driver, time).until(ExpectedConditions
-//                    .attributeToBe(locator,attribut,value));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void waitUntilAttributValuesIs(WebElement element, String attribut, String value, int time) {
-//        try {
-//            new WebDriverWait(driver, time).until(ExpectedConditions
-//                    .attributeToBe(element,attribut,value));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void waitUntilElementIsVisible(By locator, int time) {
-//        try {
-//            new WebDriverWait(driver,time).until(ExpectedConditions
-//                    .visibilityOfElementLocated(locator));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public void waitUntilElementIsVisible(WebElement element, int time) {
-//        try {
-//            new WebDriverWait(driver,time).until(ExpectedConditions
-//                    .visibilityOf(element));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void waitUntilElementIsNotVisible(By locator, int time) {
-//        try {
-//            new WebDriverWait(driver, time).until(ExpectedConditions
-//                    .invisibilityOfElementLocated(locator));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public void waitUntilElementIsNotVisible(WebElement element, int time) {
-//        try {
-//            new WebDriverWait(driver, time).until(ExpectedConditions
-//                            .invisibilityOf(element));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void waitUntilAllElementsAreVisible(By locator, int time) {
-//        try {
-//            new WebDriverWait(driver,time).until(ExpectedConditions
-//                    .visibilityOfAllElementsLocatedBy(locator));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public void waitUntilAllElementsAreVisible(List<WebElement> elementsList, int time) {
-//        try {
-//            new WebDriverWait(driver,time).until(ExpectedConditions
-//                    .visibilityOfAllElements(elementsList));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public void waitUntilNumberOfWindows(int number, int time) {
-//        try {
-//            new WebDriverWait(driver,time).until(ExpectedConditions
-//                    .numberOfWindowsToBe(number));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void waitUntilFrameIsLoadedAndSwitchToIt(WebElement frame, int time) {
-//        try {
-//            new WebDriverWait(driver,time).until(ExpectedConditions
-//                    .frameToBeAvailableAndSwitchToIt(frame));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public String getAnotherWindowHandle(String mainHandle) {
-//        Set<String> setHandles = driver.getWindowHandles();
-//        String anotherHendle="";
-//        for (String handle : setHandles) {
-//            if(!handle.equals(mainHandle))
-//                anotherHendle = handle;
-//            }
-//                return anotherHendle;
-//
-//        }
-//
-//    public void switchToWindow(String anotherHandle) {
-//        driver.switchTo().window(anotherHandle);
-//    }
-//
-//    public void fillField(WebElement textField, String value) {
-//        textField.click();
-//        textField.clear();
-//        textField.sendKeys(value);
-//    }
 }

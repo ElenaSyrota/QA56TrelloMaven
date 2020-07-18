@@ -26,18 +26,21 @@ public class CurrentBoardTests extends TestBase {
 
     @Test
     public void createNewList()  {
+        log4j.startTestCase("createNewList");
         int beforeAdding = qaHaifa56Page.getListsQuantity();
         System.out.println("Lists before adding: " + beforeAdding);
+        log4j.info("Create new list");
         qaHaifa56Page.createNewList("Test");
 
         int afterAdding = qaHaifa56Page.getListsQuantity();
         Assert.assertEquals(afterAdding,beforeAdding+1,
                 "The quantity of lists before adding new list is not the same as the quantity after adding");
-
+        log4j.endTestCase();
     }
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "dataProviderThirdDP")
     public void createNewCard(String nameCard)  {
+        log4j.startTestCase("createNewCard");
         if (!qaHaifa56Page.existsList()) qaHaifa56Page.createNewList("Test");
 
         int beforeAdding = qaHaifa56Page.receiveQuantityOfCards();
@@ -49,7 +52,7 @@ public class CurrentBoardTests extends TestBase {
         int afterAdding = qaHaifa56Page.receiveQuantityOfCards();
         Assert.assertEquals(afterAdding,beforeAdding+1,
                 "The quantity of cards before adding new card is not the same as the quantity after adding");
-
+        log4j.endTestCase();
 
     }
 }
