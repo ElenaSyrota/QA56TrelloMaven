@@ -1,10 +1,13 @@
-package tests;
+package ru.stqa.selenium.tests;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.selenium.pages.*;
+import ru.stqa.selenium.pages.BoardsPageHelper;
+import ru.stqa.selenium.pages.LoginPageHelper;
+import ru.stqa.selenium.pages.ProfileVisabilityHelper;
+import ru.stqa.selenium.pages.UpperMenuHelper;
 
 public class ProfilesVisabilityTests extends TestBase {
     LoginPageHelper loginPage;

@@ -1,4 +1,4 @@
-package tests;
+package ru.stqa.selenium.tests;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -8,7 +8,7 @@ import ru.stqa.selenium.pages.*;
 import util.DataProviders;
 //import pages.*;
 
-public class ActivityMenuTests extends TestBase{
+public class ActivityMenuTests extends TestBase {
     LoginPageHelper loginPage;
     BoardsPageHelper boardsPage;
     CurrentBoardHelper qaHaifa56Page;

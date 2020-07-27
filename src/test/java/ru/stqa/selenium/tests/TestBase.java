@@ -1,28 +1,25 @@
-package tests;
+package ru.stqa.selenium.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-//import HomePageHelper;
 import ru.stqa.selenium.SuiteConfiguration;
-import ru.stqa.selenium.factory.AbstractWebDriverPool;
 import ru.stqa.selenium.factory.WebDriverPool;
 import ru.stqa.selenium.pages.HomePageHelper;
 import util.LogLog4j;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
+//import HomePageHelper;
 
 public class TestBase {
     protected static URL gridHubUrl = null;
@@ -55,11 +52,24 @@ public class TestBase {
 
         @Override
         public void onException(Throwable throwable, WebDriver driver) {
-            log4j.error("Error: "+ throwable);
+            String screenName = "screen-"+System.currentTimeMillis()+".png";
+           createSnapshot(screenName, driver);
+            log4j.error("Error: "+ throwable +" See file "+ screenName);
+        }
+
+
+    }
+    public static void createSnapshot(String name, WebDriver driver){
+        File tmp = ((TakesScreenshot)driver).getScreenshotAs((OutputType.FILE));
+        File screen  = new File(name);
+        try {
+            Files.copy(tmp,screen);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void initTestSuite() throws IOException {
         SuiteConfiguration config = new SuiteConfiguration();
         baseUrl = config.getProperty("site.url");
@@ -69,7 +79,7 @@ public class TestBase {
         capabilities = config.getCapabilities();
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initWbDriver() {
         log4j.startTestCase("initWbDriver");
 
@@ -81,8 +91,14 @@ public class TestBase {
 
     }
 
-    @AfterMethod
-    public void tearDownForTest(){
+    @AfterMethod(alwaysRun = true)
+    public void tearDownForTest(ITestResult result){
+
+        if(result.getStatus() == ITestResult.FAILURE){
+            String screenName = "screen-"+System.currentTimeMillis()+".png";
+            createSnapshot(screenName, driver);
+            log4j.error("Test failure,  "+ " see file "+ screenName);
+        }
         driver.quit();
     }
 

@@ -1,10 +1,12 @@
-package tests;
+package ru.stqa.selenium.tests;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.selenium.pages.*;
+import ru.stqa.selenium.pages.BoardsPageHelper;
+import ru.stqa.selenium.pages.CurrentBoardHelper;
+import ru.stqa.selenium.pages.LoginPageHelper;
 import util.DataProviders;
 
 public class CurrentBoardTests extends TestBase {

@@ -1,4 +1,4 @@
-package tests;
+package ru.stqa.selenium.tests;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import ru.stqa.selenium.pages.*;
 //import pages.*;
 
-public class GettingStartedHelpTests extends TestBase{
+public class GettingStartedHelpTests extends TestBase {
     LoginPageHelper loginPage;
     BoardsPageHelper boardsPage;
     CurrentBoardHelper qaHaifa56Page;

@@ -1,6 +1,6 @@
 
 
-package tests;
+package ru.stqa.selenium.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -8,9 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.selenium.pages.*;
-import sun.security.util.Password;
-import tests.TestBase;
+import ru.stqa.selenium.pages.BoardsPageHelper;
+import ru.stqa.selenium.pages.LoginPageHelper;
 import util.DataProviders;
 //import ru.stqa.selenium.util.DataProviders;
 
@@ -19,19 +18,19 @@ public class LoginTests extends TestBase {
     LoginPageHelper loginPage;
     BoardsPageHelper boardsPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initTests(){
         loginPage = PageFactory.initElements(driver, LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver,BoardsPageHelper.class);
         loginPage.openLoginPage();
     }
 
-    @Test
+    @Test(groups = {"smoke","regression","login"})
     public void loginTestPositive()  {
         log4j.startTestCase("loginTestPositive");
         log4j.info("Login/password were entering: "+LOGIN+", "+ PASSWORD);
         loginPage.enterLoginAtlassianAndClickLogin(LOGIN)
-                .enterPasswordAtlassionAndClickLogin(PASSWORD);
+                 .enterPasswordAtlassionAndClickLogin(PASSWORD);
 
         log4j.info("Boards screen is loading");
         boardsPage.waitUntilPageIsLoaded();
@@ -54,7 +53,7 @@ public class LoginTests extends TestBase {
     }
 
 
-    @Test(dataProviderClass = DataProviders.class,dataProvider = "dataProviderFirst")
+    @Test(groups = {"smoke"}, dataProviderClass = DataProviders.class,dataProvider = "dataProviderFirst")
     public void NegativeLoginIncorrect(String login, String password, String message)  {
         log4j.startTestCase("NegativeLoginIncorrect: "+login +", " + password + ", " + message );
         log4j.info("Login to the system: " + login + ", " + password);
